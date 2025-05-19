@@ -69,7 +69,7 @@ class DynamicWidthCNNLightning(pl.LightningModule):
         self,
         initial_width: int = 32,
         learning_rate: float = 0.001,
-        width_double_epoch: int = 5,
+        width_double_epoch: int | None = 5,
     ):
         super().__init__()
         # Save hyperparameters as class attributes for type checking
@@ -192,6 +192,9 @@ class DynamicWidthCNNLightning(pl.LightningModule):
 
     def on_train_epoch_start(self) -> None:
         # Double width at specified intervals
+        if self.width_double_epoch is None:
+            return
+
         if self.current_epoch > 0 and self.current_epoch % self.width_double_epoch == 0:
             self.double_width()
 

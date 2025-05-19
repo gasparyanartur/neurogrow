@@ -22,16 +22,16 @@ def main():
         "--batch-size", type=int, default=32, help="input batch size for training"
     )
     parser.add_argument(
-        "--epochs", type=int, default=20, help="number of epochs to train"
+        "--epochs", type=int, default=50, help="number of epochs to train"
     )
     parser.add_argument("--lr", type=float, default=0.001, help="learning rate")
     parser.add_argument(
-        "--initial-width", type=int, default=32, help="initial network width"
+        "--initial-width", type=int, default=16, help="initial network width"
     )
     parser.add_argument(
         "--width-double-epoch",
         type=int,
-        default=5,
+        default=10,
         help="epoch interval for doubling width",
     )
     parser.add_argument(
@@ -61,7 +61,7 @@ def main():
     parser.add_argument(
         "--overfit-batches",
         type=int,
-        default=None,
+        default=0,
         help="number of batches to overfit on",
     )
     args = parser.parse_args()
@@ -89,7 +89,7 @@ def main():
 
     # Setup callbacks
     checkpoint_callback = ModelCheckpoint(
-        dirpath=save_dir,
+        dirpath=None,
         filename="imagenet-{epoch:02d}-{val_acc:.2f}",
         monitor="val_acc",
         mode="max",
