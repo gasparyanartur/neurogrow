@@ -1,0 +1,25 @@
+# UV project config
+[project]
+name = "neurogrow"
+version = "0.1.0"
+description = "Dynamic width CNN for ImageNet"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "pytorch-lightning>=2.0.0",
+    "torchmetrics>=1.0.0",
+    "tensorboard>=2.13.0",
+    "matplotlib>=3.7.0",
+    "pytest>=7.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"
